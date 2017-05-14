@@ -1,6 +1,6 @@
 # Written by DJ Edmonson
 # Warnings frequently signal eventual errors:
-CXXFLAGS= -g -W -Wall -Weffc++ -Wextra -pedantic -O0
+CXXFLAGS= -g -std=gnu++11 -W -Wall -Weffc++ -Wextra -pedantic -O0
 
 # Linker flags for both OS X and Linux
 LDFLAGS = 
@@ -35,7 +35,6 @@ clean:
 	rm -rf $(OBJS)
 	rm -rf $(DEPS)
 	rm -rf $(EXEC)
-	rm -rf frames/*.bmp
 
 # Phony target to use clang for compile and linking
 setclang:

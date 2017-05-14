@@ -16,13 +16,14 @@ public:
 	
 	void clear();
 
+        std::vector<ElemType> operator[](unsigned);
+        ElemType& at(unsigned, unsigned);
+
 	/* basic info funcs */
 
 	size_t nRows() const;
 	size_t nCols() const;
 	bool empty() const;
-
-	/* accessor funcs */
 
 	/*iterator funcs */
 
@@ -37,6 +38,12 @@ public:
 
 	const_iterator cbegin ();
 	const_iterator cend (); 
+        
+        void appendRow(const std::vector<ElemType>&);
+        void appendCol(const std::vector<ElemType>&);
+
+        template <class E>        
+        friend std::ostream& operator<<(std::ostream& os, const Grid<E>& g);
 
 private:
 	std::vector<ElemType> elems;
@@ -44,6 +51,67 @@ private:
 	size_t cols;
 
 };
+
+template <typename ElemType>
+std::ostream& operator<<(std::ostream& os, const Grid<ElemType>& g)
+{
+    int index = 0;
+    for (unsigned i=0; i<g.nRows(); i++)
+    {
+        for (unsigned j=0; j<g.nCols(); j++)
+        {
+            std::cout << g.elems[index];
+            index += 1;
+        }
+        std::cout << std::endl;
+    }
+    return os;
+}
+
+template <typename ElemType>
+std::vector<ElemType> Grid<ElemType>::operator[](unsigned a)
+{
+    unsigned startIndex;
+    unsigned endIndex;
+    startIndex = cols*(a-1);
+    endIndex = startIndex + cols;
+    typename std::vector<ElemType> resRow(endIndex-startIndex+1); 
+
+    for ( unsigned i = startIndex; i < endIndex; i++)
+    {
+        resRow.push_back(elems[i]);
+    }
+    return resRow;
+
+}
+
+template <typename ElemType>
+ElemType& Grid<ElemType>::at(unsigned a, unsigned b)
+{
+    unsigned index;
+    if (a>0 && b > 0)
+    {
+        index = cols*(b-1) + (a-1);
+    }
+    else
+    {
+        throw "Index cannot be 0";
+    }
+//    std::cout << "At Index " << index << " " << a << b << std::endl;
+    return elems[index];
+}
+
+template <typename ElemType>
+size_t Grid<ElemType>::nRows() const
+{
+    return rows;
+}
+
+template <typename ElemType>
+size_t Grid<ElemType>::nCols() const
+{
+    return cols;
+}
 
 /* Constructs a new, empty grid. */
 template <typename ElemType> Grid<ElemType>::Grid() : 
@@ -63,6 +131,33 @@ Grid<ElemType>::Grid(size_t rows, size_t cols) :
 {
 
 }
+
+/* Appends row in Grid in  */
+template <typename ElemType>
+void Grid<ElemType>::appendRow(const std::vector<ElemType>& row)
+{
+//    typename std::vector<ElemType>::const_iterator it; 
+    for (auto it = row.begin(); it != row.end(); it++)
+    {
+        elems.push_back(*it);
+
+    }
+    rows += 1;
+    cols = row.size();
+}
+
+/* Appends col in Grid in  */
+template <typename ElemType>
+void Grid<ElemType>::appendCol(const std::vector<ElemType>& col)
+{
+    typename std::vector<ElemType>::const_iterator it; 
+    for (it = col.cbegin(); it != col.cend(); it++)
+    {
+        elems.push_back(*it);
+    }
+
+}
+
 
 /* Iterator support, including const overloads. */
 
