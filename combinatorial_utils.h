@@ -31,10 +31,9 @@ void PascalTriangle::configureTriangle(unsigned lines)
   for (auto line = currentlen; line <= lines; line++)
   {
     std::vector <int> row;
-    auto c = 1;  // used to represent C(line, i)
+    auto c = 1;
     for (auto i = 1; i <= line; i++)
     {
-      //std::cout << c;
       row.push_back(c);
       c = c * (line - i) / i;
     }
