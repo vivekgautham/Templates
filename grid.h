@@ -1,8 +1,6 @@
 #ifndef GRID_H
 #define GRID_H
-
-#include <vector>
-#include <algorithm>
+#include "header.h"
 
 template <typename ElemType>
 class Grid

@@ -1,10 +1,11 @@
 #include "header.h"
 #include "grid.h"
 #include "fibonacci.h"
-
+#include "combinatorial_utils.h"
 
 int main()
 {
+	/*
 	Grid<int> g;
 
 	FibonacciIterator<int> f;
@@ -29,7 +30,10 @@ int main()
 	f--;
 
 	std::cout << *f << std::endl;
-
+*/
+	PascalTriangle p;
+	unsigned a = p.getBinomialCoeff(0, 0);
+	std::cout << a << '\n';
 
 
 }
