@@ -8,3 +8,4 @@
 #include <algorithm>
 #include <stdexcept>
 #include <iterator>
+#include <cassert>
