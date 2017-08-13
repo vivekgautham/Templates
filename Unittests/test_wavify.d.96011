@@ -1,1 +1,0 @@
-test_wavify.o: test_wavify.cpp ../wavy_array.h ../header.h
