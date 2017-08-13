@@ -1,9 +1,9 @@
 # Written by DJ Edmonson
 # Warnings frequently signal eventual errors:
-CXXFLAGS= -g -std=gnu++11 -W -Wall -Weffc++ -Wextra -pedantic -O0
+CXXFLAGS= -g -std=c++14 -W -Wall -Weffc++ -Wextra -pedantic -O0
 
 # Linker flags for both OS X and Linux
-LDFLAGS = 
+LDFLAGS =
 
 # Generates list of object files from all the
 #   source files in directory
