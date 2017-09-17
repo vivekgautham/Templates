@@ -13,18 +13,14 @@ public:
 	};
 
 	void clear();
-
-        std::vector<ElemType> operator[](unsigned);
-        ElemType& at(unsigned, unsigned);
-
+  std::vector<ElemType> operator[](unsigned) const;
+  ElemType at(unsigned, unsigned) const;
+	void setValue(unsigned, unsigned, ElemType);
 	/* basic info funcs */
-
 	size_t nRows() const;
 	size_t nCols() const;
 	bool empty() const;
-
 	/*iterator funcs */
-
 	typedef typename std::vector<ElemType>::iterator iterator;
 	typedef typename std::vector<ElemType>::const_iterator const_iterator;
 
@@ -36,7 +32,7 @@ public:
 
 	const_iterator cbegin ();
 	const_iterator cend ();
-
+	/* modifying functions */
   void appendRow(const std::vector<ElemType>&);
   void appendCol(const std::vector<ElemType>&);
 
@@ -58,7 +54,7 @@ std::ostream& operator<<(std::ostream& os, const Grid<ElemType>& g)
 	  {
 	      for (unsigned j=0; j<g.nCols(); j++)
 	      {
-	          std::cout << g.elems[index];
+	          std::cout << g.elems[index] << ' ';
 	          index += 1;
 	      }
 	      std::cout << std::endl;
@@ -67,7 +63,7 @@ std::ostream& operator<<(std::ostream& os, const Grid<ElemType>& g)
 }
 
 template <typename ElemType>
-std::vector<ElemType> Grid<ElemType>::operator[](unsigned a)
+std::vector<ElemType> Grid<ElemType>::operator[](unsigned a) const
 {
     unsigned startIndex;
     unsigned endIndex;
@@ -84,7 +80,7 @@ std::vector<ElemType> Grid<ElemType>::operator[](unsigned a)
 }
 
 template <typename ElemType>
-ElemType& Grid<ElemType>::at(unsigned a, unsigned b)
+ElemType Grid<ElemType>::at(unsigned a, unsigned b) const
 {
     unsigned index;
     if (a > 0 && b > 0)
@@ -96,6 +92,21 @@ ElemType& Grid<ElemType>::at(unsigned a, unsigned b)
         throw "Index cannot be 0";
     }
     return elems[index];
+}
+
+template <typename ElemType>
+void Grid<ElemType>::setValue(unsigned a, unsigned b, ElemType val)
+{
+    unsigned index;
+    if (a > 0 && b > 0)
+    {
+        index = cols*(a-1) + (b-1);
+    }
+    else
+    {
+        throw std::runtime_error("Index cannot be 0");
+    }
+    elems[index] = val;
 }
 
 template <typename ElemType>

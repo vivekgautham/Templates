@@ -7,16 +7,20 @@ void wavify(Iter begin, Iter end, CmpType lessThanComp={})
 {
     if (begin == end || std::distance(begin, end) <= 2)
       return;
-    std::sort(begin, end, lessThanComp);
+
     unsigned size = std::distance(begin, end);
     Iter curr = begin;
-    for (unsigned i=1; i<size; i++)
+    for (unsigned i=0; i<size; i+=2)
     {
-      if ((i%2 == 0 && lessThanComp(*curr, *std::prev(curr))) || (i%2 == 1 && !lessThanComp(*curr, *std::prev(curr))))
+      if ( i > 0 && lessThanComp(*curr, *std::prev(curr)) )
       {
         std::iter_swap(curr, std::prev(curr));
       }
-      std::advance(curr, 1);
+      if ( i < size-1 && lessThanComp(*curr, *std::next(curr)) )
+      {
+        std::iter_swap(curr, std::next(curr));
+      }
+      std::advance(curr, 2);
     }
 
 }

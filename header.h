@@ -9,3 +9,4 @@
 #include <stdexcept>
 #include <iterator>
 #include <cassert>
+#include <cmath>
