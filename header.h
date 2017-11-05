@@ -10,3 +10,4 @@
 #include <iterator>
 #include <cassert>
 #include <cmath>
+#include <sstream>

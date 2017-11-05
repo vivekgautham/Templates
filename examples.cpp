@@ -1,8 +1,5 @@
 #include "header.h"
-#include "grid.h"
-#include "fibonacci.h"
-#include "combinatorial_utils.h"
-#include "dputils.h"
+#include "next_sequence.h"
 #include "matrix.h"
 
 int main()
@@ -18,11 +15,14 @@ int main()
 		}
 	}
 
-	std::cout << m << std::endl;
 
-	//std::cout << m.nRows() << std::endl;
-	//std::cout << m.nCols() << std::endl;
-	//std::cout << m.getMinor(2,2,3)  << std::endl;
+	std::vector<int> v = {1, 2, 6, 4, 5};
 
-	std::cout << ~m << std::endl;
+	std::cout << almostIncreasingSequence(v.begin(), v.end()) << "\n\n" << std::endl;
+
+	std::vector<int> v1 = {10, 1, 2, 3, 4, 5};
+
+	std::cout << almostIncreasingSequence(v1.begin(), v1.end()) << std::endl;
+
+
 }

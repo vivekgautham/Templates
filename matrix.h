@@ -3,12 +3,12 @@
 #include "header.h"
 #include "grid.h"
 
-template <typename ElemType>
+template <typename ElemType=double>
 class Matrix
 {
 public:
   Matrix(size_t, size_t);
-  Matrix(const Matrix&);
+  Matrix(const Matrix<ElemType>&);
   ~Matrix() {};
 
   std::pair<size_t, size_t> getDims() const;
@@ -17,10 +17,10 @@ public:
 
   std::vector<ElemType> operator[](size_t) const;
   ElemType operator~() const;
-  Matrix<ElemType>& operator=(const Matrix&);
+  Matrix<ElemType>& operator=(const Matrix<ElemType>&);
 
-  Matrix<ElemType> inverse(const Matrix&) const;
-  Matrix<ElemType> transpose(const Matrix&) const;
+  Matrix<ElemType> inverse(const Matrix<ElemType>&) const;
+  Matrix<ElemType> transpose(const Matrix<ElemType>&) const;
 
   size_t nRows() const
   {
@@ -60,7 +60,7 @@ Matrix<ElemType>::Matrix(size_t numRows, size_t numCols)
 }
 
 template <typename ElemType>
-Matrix<ElemType>& Matrix<ElemType>::operator=(const Matrix& rhs)
+Matrix<ElemType>& Matrix<ElemType>::operator=(const Matrix<ElemType>& rhs)
 {
     if(&rhs == this)
         return *this;
