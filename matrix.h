@@ -7,6 +7,7 @@ template <typename ElemType=double>
 class Matrix
 {
 public:
+  Matrix();
   Matrix(size_t, size_t);
   Matrix(const Matrix<ElemType>&);
   ~Matrix() {};
@@ -18,6 +19,8 @@ public:
   std::vector<ElemType> operator[](size_t) const;
   ElemType operator~() const;
   Matrix<ElemType>& operator=(const Matrix<ElemType>&);
+  Matrix<ElemType> operator*(const Matrix<ElemType>&);
+  bool operator== (const Matrix<ElemType>& rhs) const;
 
   Matrix<ElemType> inverse(const Matrix<ElemType>&) const;
   Matrix<ElemType> transpose(const Matrix<ElemType>&) const;
@@ -51,6 +54,12 @@ std::ostream& operator<<(std::ostream& os, const Matrix<ElemType>& m)
 }
 
 template <typename ElemType>
+Matrix<ElemType>::Matrix()
+{
+
+}
+
+template <typename ElemType>
 Matrix<ElemType>::Matrix(size_t numRows, size_t numCols)
 {
   std::vector<ElemType> v(numCols);
@@ -67,11 +76,54 @@ Matrix<ElemType>& Matrix<ElemType>::operator=(const Matrix<ElemType>& rhs)
     if (getDims() != rhs.getDims()){
       throw std::runtime_error("Not the same dimensions");
     }
-    for (size_t i=0; i<nRows(); i++){
-      for (size_t j=0; j<nCols(); j++){
+    for (size_t i=1; i<=nRows(); i++){
+      for (size_t j=1; j<=nCols(); j++){
         setValue(i,j,rhs.getValue(i,j));
       }
     }
+    return *this;
+}
+
+template <typename ElemType>
+Matrix<ElemType> Matrix<ElemType>::operator*(const Matrix<ElemType>& multiplier)
+{
+    if (getDims().second != multiplier.getDims().first){
+      throw std::runtime_error("Dimensions mismatch");
+    }
+
+    Matrix<ElemType> prod(getDims().first, multiplier.getDims().second);
+    ElemType tmp;
+    for (size_t i=1; i<=getDims().first; i++){
+      for (size_t j=1; j<=multiplier.getDims().second; j++){
+        for(size_t k=1; k<=getDims().second; k++){
+            if (k == 1){
+              tmp = getValue(i, k) * multiplier.getValue(k, j);
+            }
+            else{
+              tmp += getValue(i, k) * multiplier.getValue(k, j);
+            }
+        }
+        prod.setValue(i, j, tmp);
+      }
+    }
+    return prod;
+}
+
+template <typename ElemType>
+bool Matrix<ElemType>::operator==(const Matrix<ElemType>& rhs) const
+{
+    if (getDims() != rhs.getDims()){
+      return false;
+    }
+
+    bool res = true;
+
+    for (size_t i=1; i<=nRows(); i++){
+      for (size_t j=1; j<=nCols(); j++){
+        res = res && (rhs.getValue(i, j) == getValue(i, j));
+      }
+    }
+    return res;
 }
 
 template <typename ElemType>
@@ -155,7 +207,7 @@ Matrix<ElemType>::Matrix(const Matrix& m)
 template <typename ElemType>
 std::vector<ElemType> Matrix<ElemType>::operator[](size_t rowID) const
 {
-  typename std::vector<int> row(nCols());
+  typename std::vector<ElemType> row(nCols());
   std::copy(matGrid[rowID].begin(), matGrid[rowID].end(), row.begin());
   return row;
 }

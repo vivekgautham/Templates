@@ -1,28 +1,18 @@
 #include "header.h"
-#include "next_sequence.h"
+#include "interesting_problems.h"
 #include "matrix.h"
+#include "matrix_utils1.h"
+
 
 int main()
 {
 
-	Matrix<int> m(3,3);
+	Matrix <unsigned> m(3,3);
 
-	for (size_t i=1; i <= 3; i++)
-	{
-		for (size_t j=1; j <= 3; j++)
-		{
-			m.setValue(i, j, 3);
-		}
-	}
+	m = createNumMatrix<unsigned> ("3 3 0 1 0 0 1 0 1 0 1");
 
+	std::cout << m * m << std::endl;
 
-	std::vector<int> v = {1, 2, 6, 4, 5};
-
-	std::cout << almostIncreasingSequence(v.begin(), v.end()) << "\n\n" << std::endl;
-
-	std::vector<int> v1 = {10, 1, 2, 3, 4, 5};
-
-	std::cout << almostIncreasingSequence(v1.begin(), v1.end()) << std::endl;
-
+	rainfallInTerrain(m);
 
 }
