@@ -45,6 +45,66 @@ bool nextSequence(BidirectionalIterator begin, BidirectionalIterator end)
   return true;
 }
 
+unsigned long factorial(size_t a)
+{
+  if (a == 0 || a == 1){
+    return 1;
+  }
+  return a * factorial(a-1);
+}
+
+bool _diffByOneChar(const std::string& a, const std::string& b)
+{
+  if (a.size() != b.size()){
+    return false;
+  }
+  if (a == b){
+    return false;
+  }
+  unsigned short count = 0;
+  auto iter1 = a.begin();
+  auto iter2 = b.begin();
+  while (iter1 != a.end()){
+    if (*iter1 != *iter2){
+      count++;
+    }
+    iter1++;
+    iter2++;
+  }
+  if (count == 1){
+    return true;
+  }
+  return false;
+}
+
+bool stringsRearrangement(const std::vector<std::string>& l)
+{
+    /* Is it possible to rearrange the list of strings such
+       that, consecutive strings differ by one character */
+    std::vector<std::string> c;
+    c.assign(l.begin(), l.end());
+    unsigned long k = factorial(c.size());
+    while (k)
+    {
+      nextSequence(c.begin(), c.end());
+
+      unsigned short i = 0;
+      bool flag = true;
+      while (i < c.size()-1){
+        if (_diffByOneChar(c[i], c[i+1]) == false){
+          flag = false;
+          break;
+        }
+        i++;
+      }
+      k--;
+      if (flag == true){
+        return true;
+      }
+    }
+    return false;
+}
+
 template <typename Iter, typename CmpType>
 int _firstBadIdx(const Iter begin, const Iter end, CmpType cmp, int initIdx)
 {

@@ -25,6 +25,39 @@ BOOST_AUTO_TEST_CASE( NEXTSEQUENCE )
     BOOST_CHECK_EQUAL(v[4], 5);
 }
 
+BOOST_AUTO_TEST_CASE( STRING_REARRANGEMENT )
+{
+
+    std::vector<std::string> v = {"ab", "cb", "cd"};
+    auto res = stringsRearrangement(v);
+    BOOST_CHECK_EQUAL(res, true);
+
+    std::vector<std::string> v1 = {"q", "q"};
+    res = stringsRearrangement(v1);
+    BOOST_CHECK_EQUAL(res, false);
+
+    std::vector<std::string> v2 = {"zzzzab", "zzzzbb", "zzzzaa"};
+    res = stringsRearrangement(v2);
+    BOOST_CHECK_EQUAL(res, true);
+
+    std::vector<std::string> v3 = {"abc", "bef", "bcc", "bec", "bbc", "bdc"};
+    res = stringsRearrangement(v3);
+    BOOST_CHECK_EQUAL(res, true);
+
+    std::vector<std::string> v4 = {"ca", "ba", "aa", "ab", "ac", "bb"};
+    res = stringsRearrangement(v4);
+    BOOST_CHECK_EQUAL(res, true);
+
+    std::vector<std::string> v5 = {"abc", "abx", "axx", "abc"};
+    res = stringsRearrangement(v5);
+    BOOST_CHECK_EQUAL(res, false);
+
+    std::vector<std::string> v6 = {"ab", "ad", "ef", "eg"};
+    res = stringsRearrangement(v6);
+    BOOST_CHECK_EQUAL(res, false);
+
+}
+
 BOOST_AUTO_TEST_CASE( ALMOSTINCREASING )
 {
     std::vector<int> v1 = {1, 3, 2};
