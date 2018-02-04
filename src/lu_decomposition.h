@@ -48,3 +48,5 @@ std::pair< Grid<Elem>, Grid<Elem> > luDecompose(Grid<Elem> input)
     auto result = std::make_pair(u, l);
     return result;
 }
+
+#endif

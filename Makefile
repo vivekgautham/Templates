@@ -1,20 +1,26 @@
-# Written by DJ Edmonson
+
 # Warnings frequently signal eventual errors:
-CXXFLAGS= -g -std=c++14 -W -Wall -Weffc++ -Wextra -pedantic -O0
+CXXFLAGS= -g -std=gnu++11 -W -Wall -Weffc++ -Wextra -pedantic -O0
 
 # Linker flags for both OS X and Linux
-LDFLAGS =
+LDFLAGS= -lboost_system -lboost_unit_test_framework
 
 # Generates list of object files from all the
 #   source files in directory
-OBJS = $(addsuffix .o, $(basename $(shell find *.cpp)))
+OBJS = $(addsuffix .o, $(basename $(shell find ./src -name "*cpp")))
 DEPS = $(OBJS:.o=.d)
+
+TESTOBJS = $(addsuffix .o, $(basename $(shell find ./unittests -name "*cpp")))
+TESTDEPS = $(TESTOBJS:.o=.d)
 
 # Set executable name
 EXEC = run
+TESTEXEC = test
+
+all: run test
 
 # Declare the phony targets
-.PHONY: echo clean r clang gcc setclang setgcc vg
+.PHONY: echo clean r t clang gcc setclang setgcc vg
 
 # Phony targets to run dependencies in order
 gcc: | setgcc $(EXEC)
@@ -31,10 +37,17 @@ vg: $(EXEC)
 r:
 	./$(EXEC)
 
+# Run the test
+t:
+	./$(TESTEXEC)
+
 clean:
 	rm -rf $(OBJS)
 	rm -rf $(DEPS)
+	rm -rf $(TESTOBJS)
+	rm -rf $(TESTDEPS)
 	rm -rf $(EXEC)
+	rm -rf $(TESTEXEC)
 
 # Phony target to use clang for compile and linking
 setclang:
@@ -47,6 +60,26 @@ setgcc:
 	@echo "Setting g++"
 	$(eval CXX = g++)
 	$(eval CXX_LINK = g++)
+
+
+$(TESTOBJS): %.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(TESTDEPS): %.d: %.cpp
+	@echo "Generating "$@
+	@set -e; rm -f $@; \
+      g++ -MM $(CPPFLAGS) $< > $@.$$$$; \
+      sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
+      rm -f $@.$$$$
+
+
+# $@ refers to the target
+$(TESTEXEC): $(TESTOBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $(TESTOBJS) $(LDFLAGS)
+
+include $(TESTDEPS)
+
+
 
 # $< refers to the first dependency
 # Uses static pattern rule to keep from compiling all
@@ -61,8 +94,10 @@ $(DEPS): %.d: %.cpp
       sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
       rm -f $@.$$$$
 
+
 # $@ refers to the target
 $(EXEC): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(LDFLAGS)
 
 include $(DEPS)
+

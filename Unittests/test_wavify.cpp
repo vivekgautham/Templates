@@ -1,4 +1,4 @@
-#include "../wavy_array.h"
+#include "../src/wavy_array.h"
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 
