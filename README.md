@@ -1,4 +1,4 @@
-Templates ![build passing](https://raw.githubusercontent.com/dwyl/repo-badges/master/highresPNGs/build-passing.png)
+Templates ![build passing](https://img.shields.io/circleci/project/github/badges/shields.svg)
 ===========
 
 ## Algorithms and Data Structures Implemented
