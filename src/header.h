@@ -1,3 +1,6 @@
+#ifndef HEADER
+#define HEADER
+
 #include <iostream>
 #include <string>
 #include <utility>
@@ -12,3 +15,6 @@
 #include <cmath>
 #include <sstream>
 #include <unordered_map>
+#include <memory>
+
+#endif

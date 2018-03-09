@@ -8,7 +8,7 @@ class BKNode
 {
     private:
         std::string word;
-        std::unordered_map <unsigned, BKNode*> children;
+        std::unordered_map <unsigned, std::shared_ptr<BKNode>> children;
     public:
         BKNode(std::string);
         ~BKNode();
@@ -16,7 +16,7 @@ class BKNode
         std::string getWord() const {
             return word;
         }
-        BKNode* getChild(unsigned dist) const {
+        std::shared_ptr<BKNode> getChild(unsigned dist) const {
             return children.at(dist);
         }
         void addChild(unsigned, std::string);
@@ -43,10 +43,6 @@ BKNode::BKNode(std::string w)
 
 BKNode::~BKNode()
 {
-    for (auto kvpair:children){
-        std::cout << "Deleting";
-        delete kvpair.second;
-    }
 }
 
 
@@ -62,19 +58,19 @@ std::vector<unsigned> BKNode::getKeys() const
 
 
 void BKNode::addChild(unsigned dist, std::string childWord){
-    children[dist] = new BKNode(childWord);
+    children[dist] = std::make_shared<BKNode>(childWord);
 }
 
 bool BKNode::containsKey(unsigned dist) const {
-    std::unordered_map<unsigned, BKNode*>::const_iterator got = children.find(dist);
+    std::unordered_map<unsigned, std::shared_ptr<BKNode> >::const_iterator got = children.find(dist);
     return got != children.end();
 }
 
 class BK
 {
     private:
-        BKNode* root;
-        void recursivesearch(BKNode*, unsigned, std::string, std::vector<std::string>&) const;
+        std::shared_ptr<BKNode> root;
+        void recursivesearch(std::shared_ptr<BKNode>, unsigned, std::string, std::vector<std::string>&) const;
 
 
     public:
@@ -87,15 +83,13 @@ class BK
 };
 
 BK::BK()
-    :root(NULL)
 {
 
 }
 
-
 BK::~BK()
 {
-    delete root;
+    
 }
 
 void BK::displayTree() const
@@ -110,7 +104,7 @@ void BK::displayTree() const
     }
 }
 
-void BK::recursivesearch(BKNode* node, unsigned int tol, std::string word, std::vector<std::string>& res) const
+void BK::recursivesearch(std::shared_ptr<BKNode> node, unsigned int tol, std::string word, std::vector<std::string>& res) const
 {
     std::string curWord = node->getWord();
     unsigned curDist = DP::levenshteinDistance(curWord.begin(), curWord.end(), word.begin(), word.end());
@@ -144,10 +138,10 @@ void BK::add(std::string word)
     std::transform(word.begin(), word.end(), word.begin(), ::tolower);
 
     if (root == NULL){
-        root = new BKNode(word);
+        root = std::make_shared<BKNode>(word);
         return;
     }
-    BKNode* curNode = root;
+    std::shared_ptr<BKNode> curNode = root;
     std::string curWord = curNode->getWord();
     unsigned dist = DP::levenshteinDistance(curWord.begin(), curWord.end(), word.begin(), word.end());
 

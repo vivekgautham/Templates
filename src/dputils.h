@@ -1,5 +1,6 @@
 #ifndef DPUTILS_H
 #define DPUTILS_H
+
 #include "header.h"
 #include "matrix.h"
 
@@ -52,9 +53,9 @@ namespace DP {
     size_t x=2;
     size_t y=2;
 
-    for (Iter it1 = begin1; it1 < end1; it1++, x++)
+    for (Iter it1 = begin1; it1 != end1; it1++, x++)
     {
-      for (Iter it2 = begin2; it2 < end2; it2++, y++) {
+      for (Iter it2 = begin2; it2 != end2; it2++, y++) {
         if (*it1 == *it2)
         {
           m.setValue(x, y, m.getValue(x-1, y-1));

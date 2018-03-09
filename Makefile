@@ -1,6 +1,6 @@
 
 # Warnings frequently signal eventual errors:
-CXXFLAGS= -g -std=gnu++11 -W -Wall -Weffc++ -Wextra -pedantic -O0
+CXXFLAGS= -g -std=gnu++11 -W -Wall -Weffc++ -Wextra -fsanitize=address -fsanitize-address-use-after-scope -pedantic -O0
 
 # Linker flags for both OS X and Linux
 LDFLAGS= -lboost_system -lboost_unit_test_framework
@@ -18,6 +18,10 @@ EXEC = run
 TESTEXEC = test
 
 all: run test
+
+exec: run
+
+tst: test
 
 # Declare the phony targets
 .PHONY: echo clean r t clang gcc setclang setgcc vg
@@ -97,7 +101,7 @@ $(DEPS): %.d: %.cpp
 
 # $@ refers to the target
 $(EXEC): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
 
 include $(DEPS)
 

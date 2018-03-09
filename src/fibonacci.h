@@ -1,6 +1,6 @@
 
-#ifndef FIBO
-#define FIBO
+#ifndef FIBO_H
+#define FIBO_H
 
 template <typename Int, typename Plus = std::plus<Int>, typename Minus = std::minus<Int> >
 

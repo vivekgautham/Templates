@@ -17,7 +17,7 @@ BOOST_AUTO_TEST_CASE( NEXTSEQUENCE )
     std::vector<int> v = {2, 3, 5, 4, 1};
     auto res = nextSequence(v.begin(), v.end());
     BOOST_CHECK_EQUAL(res, true);
-    BOOST_CHECK_EQUAL(v.size(), 5);
+    BOOST_CHECK_EQUAL(v.size(), (unsigned int)5);
     BOOST_CHECK_EQUAL(v[0], 2);
     BOOST_CHECK_EQUAL(v[1], 4);
     BOOST_CHECK_EQUAL(v[2], 1);

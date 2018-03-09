@@ -1,5 +1,6 @@
 #ifndef MATRIX_H
 #define MATRIX_H
+
 #include "header.h"
 #include "grid.h"
 

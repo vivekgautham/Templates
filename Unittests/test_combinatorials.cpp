@@ -8,9 +8,9 @@ BOOST_AUTO_TEST_CASE( pascaltriangle )
 {
     PascalTriangle p;
 
-    BOOST_CHECK_EQUAL( p.getBinomialCoeff(0, 0), 1);
-    BOOST_CHECK_EQUAL( p.getBinomialCoeff(3, 0), 1);
-    BOOST_CHECK_EQUAL( p.getBinomialCoeff(3, 1), 3);
+    BOOST_CHECK_EQUAL( p.getBinomialCoeff(0, 0), (unsigned int)1);
+    BOOST_CHECK_EQUAL( p.getBinomialCoeff(3, 0), (unsigned int)1);
+    BOOST_CHECK_EQUAL( p.getBinomialCoeff(3, 1), (unsigned int)3);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

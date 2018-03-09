@@ -10,7 +10,7 @@ BOOST_AUTO_TEST_CASE( WAVIFY )
 
     std::vector<int> v0 = {10, 90, 49, 2, 1, 5, 23};
     wavify(v0.begin(), v0.end());
-    BOOST_CHECK_EQUAL(v0.size(), 7);
+    BOOST_CHECK_EQUAL(v0.size(), (unsigned int)7);
     BOOST_CHECK_EQUAL(v0[0], 90);
     BOOST_CHECK_EQUAL(v0[1], 10);
     BOOST_CHECK_EQUAL(v0[2], 49);
@@ -21,7 +21,7 @@ BOOST_AUTO_TEST_CASE( WAVIFY )
 
     std::vector<int> v = {2, 3, 10, 4, 1, 7};
     wavify(v.begin(), v.end());
-    BOOST_CHECK_EQUAL(v.size(), 6);
+    BOOST_CHECK_EQUAL(v.size(), (unsigned int)6);
     BOOST_CHECK_EQUAL(v[0], 3);
     BOOST_CHECK_EQUAL(v[1], 2);
     BOOST_CHECK_EQUAL(v[2], 10);
@@ -31,7 +31,7 @@ BOOST_AUTO_TEST_CASE( WAVIFY )
 
     std::vector<int> v1 = {20, 30, 10, 5, 15, 5, 10, 40, 30};
     wavify(v1.begin(), v1.end());
-    BOOST_CHECK_EQUAL(v1.size(), 9);
+    BOOST_CHECK_EQUAL(v1.size(), (unsigned int)9);
     BOOST_CHECK_EQUAL(v1[0], 30);
     BOOST_CHECK_EQUAL(v1[1], 10);
     BOOST_CHECK_EQUAL(v1[2], 20);
