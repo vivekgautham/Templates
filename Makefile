@@ -52,6 +52,7 @@ clean:
 	rm -rf $(TESTDEPS)
 	rm -rf $(EXEC)
 	rm -rf $(TESTEXEC)
+	rm -rf ./unittests/*.d.*
 
 # Phony target to use clang for compile and linking
 setclang:
