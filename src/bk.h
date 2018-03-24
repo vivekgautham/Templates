@@ -108,7 +108,6 @@ void BK::recursivesearch(std::shared_ptr<BKNode> node, unsigned int tol, std::st
 {
     std::string curWord = node->getWord();
     unsigned curDist = DP::levenshteinDistance(curWord.begin(), curWord.end(), word.begin(), word.end());
-    node->displayChildren();
 
     if (curDist <= tol)
     {

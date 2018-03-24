@@ -1,7 +1,5 @@
-#ifndef MAT_UTILS1_H
-#define MAT_UTILS1_H
-
-#include "matrix_utils1.h"
+#ifndef MAT_UTILS_H
+#define MAT_UTILS_H
 
 template <typename T= double >
 Matrix<T> createNumMatrix(const std::string matInString)

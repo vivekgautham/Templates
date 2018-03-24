@@ -1,5 +1,5 @@
 #include "../src/matrix.h"
-#include "../src/matrix_utils1.h"
+#include "../src/matrix_utils.h"
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 
