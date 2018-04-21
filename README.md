@@ -1,4 +1,4 @@
-Templates ![build passing](https://img.shields.io/circleci/project/github/badges/shields.svg)
+Templates ![build passing](https://img.shields.io/travis/USER/REPO.svg
 ===========
 
 ## Algorithms and Data Structures Implemented
