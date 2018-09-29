@@ -7,3 +7,4 @@ Templates ![build passing](https://img.shields.io/appveyor/ci/gruntjs/grunt.svg)
 + Matrix Implementation and other related utils
 + Combinatorial Utils
 + Fibonacci Iterator
++ Fenwick Trees

@@ -12,13 +12,13 @@ BOOST_AUTO_TEST_CASE( TRIMVECTOR )
     }        
     
 
-    BOOST_CHECK_EQUAL( v.size(), 10 );
-    BOOST_CHECK_EQUAL( v.capacity(), 16 );
+    BOOST_CHECK_EQUAL( v.size(), (unsigned long)10 );
+    BOOST_CHECK_EQUAL( v.capacity(), (unsigned long)16 );
 
     trimVector<size_t> (v);
     
-    BOOST_CHECK_EQUAL( v.size(), 10 );
-    BOOST_CHECK_EQUAL( v.capacity(), 10 );
+    BOOST_CHECK_EQUAL( v.size(), (unsigned long)10 );
+    BOOST_CHECK_EQUAL( v.capacity(), (unsigned long)10 );
 
 
 }

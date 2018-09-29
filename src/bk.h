@@ -23,14 +23,12 @@ class BKNode
         std::vector<unsigned> getKeys() const;
         void displayChildren() const{
             for (auto kv: children){
-                std::cout << "Word " << kv.second->getWord() << " - Dist from parent " << word << " is "<<  kv.first << std::endl;
                 kv.second->displayChildren();
                 std::cout << std::endl;
             }
         }
         void display() const
         {
-            std::cout << "Word " << word << std::endl;
             displayChildren();
         }
 };
@@ -97,10 +95,6 @@ void BK::displayTree() const
     if (root != NULL)
     {
         root->display();
-    }
-    else
-    {
-        std::cout << "Tree Empty";
     }
 }
 
